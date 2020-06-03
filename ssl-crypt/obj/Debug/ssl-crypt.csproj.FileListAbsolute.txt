@@ -1,0 +1,7 @@
+c:\users\dragosc\source\repos\ssl-crypt\ssl-crypt\obj\Debug\ssl-crypt.csprojAssemblyReference.cache
+c:\users\dragosc\source\repos\ssl-crypt\ssl-crypt\obj\Debug\ssl-crypt.csproj.CoreCompileInputs.cache
+c:\users\dragosc\source\repos\ssl-crypt\ssl-crypt\bin\Debug\ssl-crypt.exe.config
+c:\users\dragosc\source\repos\ssl-crypt\ssl-crypt\bin\Debug\ssl-crypt.exe
+c:\users\dragosc\source\repos\ssl-crypt\ssl-crypt\bin\Debug\ssl-crypt.pdb
+c:\users\dragosc\source\repos\ssl-crypt\ssl-crypt\obj\Debug\ssl-crypt.exe
+c:\users\dragosc\source\repos\ssl-crypt\ssl-crypt\obj\Debug\ssl-crypt.pdb
