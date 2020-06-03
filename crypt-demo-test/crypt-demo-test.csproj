@@ -5,7 +5,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{BF450141-A3B8-4F4B-9059-C1B3E68352AD}</ProjectGuid>
+    <ProjectGuid>{AF79E53C-2748-4923-858E-D9C2986E8934}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>crypt_demo_test</RootNamespace>
@@ -49,11 +49,19 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="UnitTest1.cs" />
+    <Compile Include="AesCryptTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SslCryptTest.cs" />
+    <Compile Include="RsaCryptTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\crypt-demo\crypt-demo.csproj">
+      <Project>{b7c034cb-43e5-4313-9499-591a0e5fc81d}</Project>
+      <Name>crypt-demo</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets" Condition="Exists('$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets')" />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

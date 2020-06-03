@@ -3,7 +3,12 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.28307.1082
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ssl-crypt", "ssl-crypt\ssl-crypt.csproj", "{B7C034CB-43E5-4313-9499-591A0E5FC81D}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "crypt-demo", "crypt-demo\crypt-demo.csproj", "{B7C034CB-43E5-4313-9499-591A0E5FC81D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "crypt-demo-test", "crypt-demo-test\crypt-demo-test.csproj", "{AF79E53C-2748-4923-858E-D9C2986E8934}"
+	ProjectSection(ProjectDependencies) = postProject
+		{B7C034CB-43E5-4313-9499-591A0E5FC81D} = {B7C034CB-43E5-4313-9499-591A0E5FC81D}
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +20,10 @@ Global
 		{B7C034CB-43E5-4313-9499-591A0E5FC81D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B7C034CB-43E5-4313-9499-591A0E5FC81D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B7C034CB-43E5-4313-9499-591A0E5FC81D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AF79E53C-2748-4923-858E-D9C2986E8934}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AF79E53C-2748-4923-858E-D9C2986E8934}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AF79E53C-2748-4923-858E-D9C2986E8934}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AF79E53C-2748-4923-858E-D9C2986E8934}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

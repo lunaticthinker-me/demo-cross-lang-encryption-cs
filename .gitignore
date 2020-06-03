@@ -1,0 +1,5 @@
+.vs
+cert-demo/bin
+cert-demo/obj
+cert-demo-test/bin
+cert-demo-test/obj
