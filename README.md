@@ -84,8 +84,6 @@ Please run `make run`
 
 - [Dragos Cirjan](mailto:dragos.cirjan@gmail.com) - Initial work
 
-See also the list of contributors who participated in this project.
-
 ## Issues / Support
 
 Add a set of links to the [issues](/lunaticthinker-me/demo-cross-lang-encryption-cs/issues) page/website, so people can know where to add issues/bugs or ask for support.
