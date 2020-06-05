@@ -5,7 +5,7 @@ mono: none
 dotnet: 2.1.502
 script:
   - dotnet restore
-  - dotnet test
+  - dotnet test ./crypt-demo-test/crypt-demo-test.csproj
 
 # install:
 #   - nuget restore crypt-demo.sln
