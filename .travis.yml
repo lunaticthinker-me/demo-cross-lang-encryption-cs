@@ -1,16 +1,19 @@
 language: csharp
 solution: crypt-demo.sln
-# jobs:
-#   include:
-#     - mono: latest
-#     - dotnet: latest
-#       mono: none
-install:
-  - nuget restore crypt-demo.sln
-  - nuget install NUnit.Console -Version 3.9.0 -OutputDirectory testrunner
+
+mono: none
+dotnet: 2.1.502
 script:
-  - msbuild /p:Configuration=Release crypt-demo.sln
-  - mono ./testrunner/NUnit.ConsoleRunner.3.9.0/tools/nunit3-console.exe ./crypt-demo-test/bin/Release/crypt-demo-test.dll
+  - dotnet restore
+  - dotnet test
+
+# install:
+#   - nuget restore crypt-demo.sln
+#   - nuget install NUnit.Console -Version 3.9.0 -OutputDirectory testrunner
+# script:
+#   - msbuild /p:Configuration=Release crypt-demo.sln
+#   - mono ./testrunner/NUnit.ConsoleRunner.3.9.0/tools/nunit3-console.exe ./crypt-demo-test/bin/Release/crypt-demo-test.dll
+
 # after_script:
 #   - test $TRAVIS_GO_VERSION == '1.13.x' && test $TRAVIS_OS_NAME == 'linux' && sonar-scanner
 notifications:
