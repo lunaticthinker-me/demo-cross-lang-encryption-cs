@@ -10,11 +10,7 @@ install:
   - nuget install NUnit.Console -Version 3.9.0 -OutputDirectory testrunner
 script:
   - msbuild /p:Configuration=Release crypt-demo.sln
-  - find .
-  # - mono ./testrunner/NUnit.ConsoleRunner.3.9.0/tools/nunit3-console.exe ./MyProject.Tests/bin/Release/MyProject.Tests.dll
-  # - make test
-  # - make run
-  # - if [ "$TRAVIS_OS_NAME" = "osx" ]; then make run-binary BUILD_OS=darwin; else make run-binary BUILD_OS=$TRAVIS_OS_NAME; fi
+  - mono ./testrunner/NUnit.ConsoleRunner.3.9.0/tools/nunit3-console.exe ./crypt-demo-test/bin/Release/crypt-demo-test.dll
 # after_script:
 #   - test $TRAVIS_GO_VERSION == '1.13.x' && test $TRAVIS_OS_NAME == 'linux' && sonar-scanner
 notifications:
