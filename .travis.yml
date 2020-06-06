@@ -1,11 +1,12 @@
 language: csharp
 solution: crypt-demo.sln
 
-mono: none
+mono: latest
 dotnet: 3.1
 script:
-  - dotnet restore
-  - dotnet test ./crypt-demo-test/crypt-demo-test.csproj
+  - msbuild /p:Configuration=Release crypt-demo.sln
+  # - dotnet restore
+  - dotnet test ./crypt-demo-test/bin/Release/crypt-demo-test.dll
 
 # install:
 #   - nuget restore crypt-demo.sln
