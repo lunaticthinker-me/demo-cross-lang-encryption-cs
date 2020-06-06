@@ -1,5 +1,5 @@
 .vs
-cert-demo/bin
-cert-demo/obj
-cert-demo-test/bin
-cert-demo-test/obj
+crypt-demo/bin
+crypt-demo/obj
+crypt-demo-test/bin
+crypt-demo-test/obj
