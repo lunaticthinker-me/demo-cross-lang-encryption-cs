@@ -1,30 +1,24 @@
+# @link https://docs.travis-ci.com/user/languages/csharp/
 language: csharp
 solution: crypt-demo.sln
-
 mono: latest
 dotnet: 3.1
+install:
+  - nuget restore crypt-demo.sln
+  - nuget install NUnit.Console -Version 3.9.0 -OutputDirectory testrunner
 script:
   - msbuild /p:Configuration=Release crypt-demo.sln
-  # - dotnet restore
   - dotnet test ./crypt-demo-test/bin/Release/crypt-demo-test.dll
-
-# install:
-#   - nuget restore crypt-demo.sln
-#   - nuget install NUnit.Console -Version 3.9.0 -OutputDirectory testrunner
-# script:
-#   - msbuild /p:Configuration=Release crypt-demo.sln
-#   - mono ./testrunner/NUnit.ConsoleRunner.3.9.0/tools/nunit3-console.exe ./crypt-demo-test/bin/Release/crypt-demo-test.dll
-
-# after_script:
-#   - test $TRAVIS_GO_VERSION == '1.13.x' && test $TRAVIS_OS_NAME == 'linux' && sonar-scanner
+after_script:
+  - sonar-scanner
 notifications:
   email:
     recipients:
       - dragos.cirjan@gmail.com
     on_success: never
     on_failure: always
-# addons:
-#   sonarcloud:
-#     organization: lunaticthinker-me
-#     token:
-#       secure: Jz/6LNqChH725ITZW8dnwN+8hMAkFe6XPuohQldcZtv8ivlINojcLkTBxNX/a+Xd1cHQ5dTkHaPmOHqNbQ5N71eS/G9ZEI8JzEQN1C5EtYyVYrMHLUjb6T3FTh9axsbpwO2kWYVR7uaQz1m9tsBPDez1r+piMjnWTN7GQ+KcEL9fWw3VPvdBSEVbJomvkdd8haHBC0CiGeJO7IQ7uRmPmVXJoTTTYZXSbmDumNGLd/BRGwO9aotw7DeMSylD4W/P/V5nZtCbCGwFi4VlLvSS5wUIF6YVIvqMqt6ELNzOzjLfvbJ76eEXk6/st0Whlsb7fnrGdT16HQa4M9VIge8Qdbw1eEILoS4wMJ+9wJCrWIOb0BsYsXIWUCyOo2X77mXT3y291e+I2ty1gsWz/T35oocHXzSd9LzRH3LOnc444MzxmMtlDXctFbgy2A7vztU3a3TcF+37AYeBdoVpQOXNvBcwNiczKHUVOoEXgkHkDpp/9DxTZS/8TujPgT8bBEJlhp2Oo0hnaZwxETjdMfZYGFUfuhQiJhCohvb7XpBjwJl5xjpRUOBH4/gKvYI7zaAnU2c0vNCUZhCcbQuwoBHIHvrLNcUM1ndf/L2Jb7koRf8UcF8tGl8MAx776C8NFbeYIKNQk71zQ8LjILED8JbW/02mwjNEQmjeiWvA7P5nZNY=
+addons:
+  sonarcloud:
+    organization: lunaticthinker-me
+    token:
+      secure: f8DvqA4pluiPnjsGvYkpdo48Kh0/tjEjqVdWFMexrGbTZ+it2skkwOA/1MXVBaxEjlin5b+ef+Vt0Sb8efEm9P7iXAq37gB8JRRGIX03bcoHhhdvmtJHXMwQDb/3rHPOB68Nw6IEIUMho+yBU7OKOlzBg8FpCsjJtXXsqfgkDGx8VKkd6WIxEOhT1jchvH8lxu2dJ9KQaAeXN72UBbjtGZWSdGnKc7QuMXG3qhxgt7u5Tz3FwwEfm0mhHBXLhcKOdVgNLcp5YcEs3lhLr8KbmwqLqYstfulZxQOELYFaJH5Mp10qrv0MH6/v3s3LLZP0h5ZZ2w8bf/b3XEv/jOESs8A510LRkRfwP2rSvdEFNaD8htVcFGo5eFnpx05Zl9wnLn6Y2GYCMHfQoT09ALvDcQQjJvx2Vdo8rNPYmKCg/jjNe9JSzjueJ9Lr8qyQiJJLbyIsRALuec1oPr1GZ+sEL0uHgRk93ErsFkcHfE9o7uQJEsoJrMMZyWMu5mC5Ce9oXT8prV36hYJbDgd3mzDCrKVXo1DlUC8ftDndRUU7BbBrt5VCj/gFEYZgvnBjjpFK2HStrxeCVleq23dL8P9dCSO/1Sd7J8QLTcOB4c5Q3imd7fdzG2xYG9JMtrsMXZKW9waZF5YYsYKyd32gCBKb+1XA1f0nb9Km8baGX7WCspY=
