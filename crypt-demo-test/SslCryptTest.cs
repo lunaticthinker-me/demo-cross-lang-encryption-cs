@@ -11,14 +11,14 @@ namespace crypt_demo_test
         [TestMethod]
         public void TestNewAes()
         {
-            var certPath = String.Concat(Directory.GetCurrentDirectory(), "\\..\\..\\..\\cert\\ssl\\cert.pfx").Replace("\\", Path.PathSeparator.ToString());
+            var certPath = String.Concat(Directory.GetCurrentDirectory(), "\\..\\..\\..\\cert\\ssl\\cert.pfx").Replace("\\", Path.DirectorySeparatorChar.ToString());
             var ssl = new SslCrypt(certPath);
         }
 
         [TestMethod]
         public void TestAesEncrypt()
         {
-            var certPath = String.Concat(Directory.GetCurrentDirectory(), "\\..\\..\\..\\cert\\ssl\\cert.pfx").Replace("\\", Path.PathSeparator.ToString());
+            var certPath = String.Concat(Directory.GetCurrentDirectory(), "\\..\\..\\..\\cert\\ssl\\cert.pfx").Replace("\\", Path.DirectorySeparatorChar.ToString());
             var ssl = new SslCrypt(certPath);
             var encrypted = ssl.Encrypt("test");
         }
@@ -26,7 +26,7 @@ namespace crypt_demo_test
         [TestMethod]
         public void TestAesDecrypt()
         {
-            var certPath = String.Concat(Directory.GetCurrentDirectory(), "\\..\\..\\..\\cert\\ssl\\cert.pfx").Replace("\\", Path.PathSeparator.ToString());
+            var certPath = String.Concat(Directory.GetCurrentDirectory(), "\\..\\..\\..\\cert\\ssl\\cert.pfx").Replace("\\", Path.DirectorySeparatorChar.ToString());
             var ssl = new SslCrypt(certPath);
             var encrypted = ssl.Encrypt("test");
             var decrypted = ssl.Decrypt(encrypted);

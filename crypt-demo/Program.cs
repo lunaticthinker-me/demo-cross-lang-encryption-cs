@@ -33,8 +33,8 @@ namespace crypt_demo
 
         static void doRsa()
         {    
-            var PubPath = String.Concat(Directory.GetCurrentDirectory(), "\\..\\..\\..\\cert\\rsa\\cert.pem").Replace("\\", Path.PathSeparator.ToString());
-            var PrvPath = String.Concat(Directory.GetCurrentDirectory(), "\\..\\..\\..\\cert\\rsa\\key.pem").Replace("\\", Path.PathSeparator.ToString());
+            var PubPath = String.Concat(Directory.GetCurrentDirectory(), "\\..\\..\\..\\cert\\rsa\\cert.pem").Replace("\\", Path.DirectorySeparatorChar.ToString());
+            var PrvPath = String.Concat(Directory.GetCurrentDirectory(), "\\..\\..\\..\\cert\\rsa\\key.pem").Replace("\\", Path.DirectorySeparatorChar.ToString());
             var rsa = new RsaCrypt(PrvPath, PubPath);
 
             String encPasswordRsa = rsa.Encrypt(password);
@@ -53,7 +53,7 @@ namespace crypt_demo
 
         static void doSsl()
         {
-            var certPath = String.Concat(Directory.GetCurrentDirectory(), "\\..\\..\\..\\cert\\ssl\\cert.pfx").Replace("\\", Path.PathSeparator.ToString());
+            var certPath = String.Concat(Directory.GetCurrentDirectory(), "\\..\\..\\..\\cert\\ssl\\cert.pfx").Replace("\\", Path.DirectorySeparatorChar.ToString());
             var ssl = new SslCrypt(certPath);
 
             String encPasswordSsl = ssl.Encrypt(password);
