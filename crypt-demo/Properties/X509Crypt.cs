@@ -5,12 +5,12 @@ using System.Security.Cryptography;
 
 namespace crypt_demo.Properties
 {
-    public class SslCrypt
+    public class X509Crypt
     {
 
         private X509Certificate2 Cert;
 
-        public SslCrypt(String CertPath)
+        public X509Crypt(String CertPath)
         {
             Cert = new X509Certificate2(CertPath);
         }

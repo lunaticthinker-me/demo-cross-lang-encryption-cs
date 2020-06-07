@@ -50,7 +50,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\AesCrypt.cs" />
     <Compile Include="Properties\RsaCrypt.cs" />
-    <Compile Include="Properties\SslCrypt.cs" />
+    <Compile Include="Properties\X509Crypt.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

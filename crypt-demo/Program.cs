@@ -51,15 +51,15 @@ namespace crypt_demo
             Console.WriteLine("");
         }
 
-        static void doSsl()
+        static void doX509()
         {
-            var certPath = String.Concat(Directory.GetCurrentDirectory(), "\\..\\..\\..\\cert\\ssl\\cert.pfx").Replace("\\", Path.DirectorySeparatorChar.ToString());
-            var ssl = new SslCrypt(certPath);
+            var certPath = String.Concat(Directory.GetCurrentDirectory(), "\\..\\..\\..\\cert\\x509\\cert.pfx").Replace("\\", Path.DirectorySeparatorChar.ToString());
+            var ssl = new X509Crypt(certPath);
 
             String encPasswordSsl = ssl.Encrypt(password);
             String decPasswordSsl = ssl.Decrypt(encPasswordSsl);
 
-            Console.WriteLine("Using SSL:");
+            Console.WriteLine("Using X509:");
             Console.Write("password: ");
             Console.WriteLine(password);
             Console.Write("enc password: ");
@@ -74,7 +74,7 @@ namespace crypt_demo
         {
             doAes();
             //doRsa();
-            doSsl();
+            doX509();
 
             Console.ReadKey();
             Console.ReadKey();
