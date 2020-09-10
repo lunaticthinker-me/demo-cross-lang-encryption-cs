@@ -19,6 +19,7 @@ namespace crypt_demo
 
             String encPasswordAes = aes.Encrypt(password);
             String decPasswordAes = aes.Decrypt(encPasswordAes);
+            //String decPasswordAes = aes.Decrypt("kzGAW4f9c1KiwdxSlfsgAKQ2OCY=");
 
             Console.WriteLine("Using AES:");
             Console.Write("password: ");
