@@ -11,70 +11,33 @@ namespace crypt_demo
     class Program
     {
 
-        static string password = "th1s1smyp@ssw0rd";
-
-        static void doAes()
-        {
-            var aes = new AesCrypt("1234567890123456");
-
-            String encPasswordAes = aes.Encrypt(password);
-            String decPasswordAes = aes.Decrypt(encPasswordAes);
-
-            Console.WriteLine("Using AES:");
-            Console.Write("password: ");
-            Console.WriteLine(password);
-            Console.Write("enc password: ");
-            Console.WriteLine(encPasswordAes);
-            Console.Write("dec password: ");
-            Console.WriteLine(decPasswordAes);
-
-            Console.WriteLine("");
-        }
-
-        static void doRsa()
-        {    
-            var PubPath = String.Concat(Directory.GetCurrentDirectory(), "\\..\\..\\..\\cert\\rsa\\cert.pem").Replace("\\", Path.DirectorySeparatorChar.ToString());
-            var PrvPath = String.Concat(Directory.GetCurrentDirectory(), "\\..\\..\\..\\cert\\rsa\\key.pem").Replace("\\", Path.DirectorySeparatorChar.ToString());
-            var rsa = new RsaCrypt(PrvPath, PubPath);
-
-            String encPasswordRsa = rsa.Encrypt(password);
-            String decPasswordRsa = rsa.Decrypt(encPasswordRsa);
-
-            Console.WriteLine("Using RSA:");
-            Console.Write("password: ");
-            Console.WriteLine(password);
-            Console.Write("enc password: ");
-            Console.WriteLine(encPasswordRsa);
-            Console.Write("dec password: ");
-            Console.WriteLine(decPasswordRsa);
-
-            Console.WriteLine("");
-        }
-
-        static void doX509()
-        {
-            var certPath = String.Concat(Directory.GetCurrentDirectory(), "\\..\\..\\..\\cert\\x509\\cert.pfx").Replace("\\", Path.DirectorySeparatorChar.ToString());
-            var ssl = new X509Crypt(certPath);
-
-            String encPasswordSsl = ssl.Encrypt(password);
-            String decPasswordSsl = ssl.Decrypt(encPasswordSsl);
-
-            Console.WriteLine("Using X509:");
-            Console.Write("password: ");
-            Console.WriteLine(password);
-            Console.Write("enc password: ");
-            Console.WriteLine(encPasswordSsl);
-            Console.Write("dec password: ");
-            Console.WriteLine(decPasswordSsl);
-
-            Console.WriteLine("");
-        }
+        static string data = "th1s1smyp@ssw0rd";
+        static string aes128Hash = "1234567890123456";
+        static string aes192Hash = "123456789012345612345678";
+        static string aes256Hash = "12345678901234561234567890123456";
 
         static void Main(string[] args)
         {
-            doAes();
-            //doRsa();
-            doX509();
+
+            Console.WriteLine("// AES Encrypted Values:");
+            Console.WriteLine("CS_AES_CFB8_128 = '{0}'", (new AesCrypt(aes128Hash)).Encrypt(data));
+            Console.WriteLine("CS_AES_CFB8_192 = '{0}'", (new AesCrypt(aes192Hash)).Encrypt(data));
+            Console.WriteLine("CS_AES_CFB8_256 = '{0}'", (new AesCrypt(aes256Hash)).Encrypt(data));
+            Console.WriteLine("CS_AES_CBC_128 = '{0}'", (new AesCrypt(aes128Hash, System.Security.Cryptography.CipherMode.CBC)).Encrypt(data));
+            Console.WriteLine("CS_AES_CBC_192 = '{0}'", (new AesCrypt(aes192Hash, System.Security.Cryptography.CipherMode.CBC)).Encrypt(data));
+            Console.WriteLine("CS_AES_CBC_256 = '{0}'", (new AesCrypt(aes256Hash, System.Security.Cryptography.CipherMode.CBC)).Encrypt(data));
+
+            var PubPath = String.Concat(Directory.GetCurrentDirectory(), "\\..\\..\\..\\cert\\rsa\\cert.pem").Replace("\\", Path.DirectorySeparatorChar.ToString());
+            var PrvPath = String.Concat(Directory.GetCurrentDirectory(), "\\..\\..\\..\\cert\\rsa\\key.pem").Replace("\\", Path.DirectorySeparatorChar.ToString());
+
+            Console.WriteLine("// RSA Encrypted Values:");
+            Console.WriteLine("CS_RSA_PKCS1V1_5 = '{0}'", (new RsaCrypt(PrvPath, PubPath, RsaCrypt.PADDING_PKCS1V15)).Encrypt(data));
+            Console.WriteLine("CS_RSA_OAEP = '{0}'", (new RsaCrypt(PrvPath, PubPath, RsaCrypt.PADDING_OAEP)).Encrypt(data));
+
+            var certPath = String.Concat(Directory.GetCurrentDirectory(), "\\..\\..\\..\\cert\\x509\\cert.pfx").Replace("\\", Path.DirectorySeparatorChar.ToString());
+
+            Console.WriteLine("// X509 Encrypted Values:");
+            Console.WriteLine("CS_X509 = '{0}'", (new X509Crypt(certPath)).Encrypt(data));
 
             Console.ReadKey();
             Console.ReadKey();

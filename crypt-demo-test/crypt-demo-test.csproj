@@ -52,6 +52,7 @@
   <ItemGroup>
     <Compile Include="AesCryptTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="BaseTest.cs" />
     <Compile Include="X509CryptTest.cs" />
     <Compile Include="RsaCryptTest.cs" />
   </ItemGroup>

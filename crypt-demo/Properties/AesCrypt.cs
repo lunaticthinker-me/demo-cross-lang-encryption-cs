@@ -9,9 +9,12 @@ namespace crypt_demo.Properties
     public class AesCrypt
     {
 
-        private RijndaelManaged aes;
+        private RijndaelManaged alg;
+        //private Aes alg;
 
-        public AesCrypt(String Hash)
+        private int BlockSize = 16;
+
+        public AesCrypt(String Hash, CipherMode Mode = CipherMode.CFB)
         {
 
             if (Hash.Length != 16 && Hash.Length != 24 && Hash.Length != 32)
@@ -19,12 +22,18 @@ namespace crypt_demo.Properties
                 throw new Exception("Invalid hash length. Must be 16, 24 or 32.");
             }
 
-            aes = new RijndaelManaged();
-            aes.KeySize = Hash.Length * 8;
-            aes.Mode = CipherMode.CFB;
-            aes.Padding = PaddingMode.None;
-            aes.Key = Encoding.UTF8.GetBytes(Hash);
-            aes.GenerateIV();
+            // https://gist.github.com/mark-adams/87aa34da3a5ed48ed0c7
+            alg = new RijndaelManaged();
+            //alg = Aes.Create();
+            alg.KeySize = Hash.Length * 8;
+            alg.BlockSize = BlockSize * 8;
+
+            alg.FeedbackSize = 8; // seems that C# Likes only CFB-8
+            alg.Mode = Mode;
+            alg.Padding = (Mode == CipherMode.CBC) ? PaddingMode.PKCS7 : PaddingMode.None;
+
+            alg.Key = Encoding.UTF8.GetBytes(Hash);
+            alg.GenerateIV();
         }
 
         /**
@@ -34,16 +43,21 @@ namespace crypt_demo.Properties
         {
             byte[] data = Encoding.UTF8.GetBytes(password);
 
-            using (var encryptor = this.aes.CreateEncryptor())
+            using (var encryptor = alg.CreateEncryptor(alg.Key, alg.IV))
             using (var msEncrypt = new MemoryStream())
             using (var csEncrypt = new CryptoStream(msEncrypt, encryptor, CryptoStreamMode.Write))
-            using (var bw = new BinaryWriter(csEncrypt, Encoding.UTF8))
+
+            //using (var bw = new BinaryWriter(csEncrypt, Encoding.UTF8))
+            //{
+            //    bw.Write(data);
+            //    bw.Close();
+
             {
-                bw.Write(data);
-                bw.Close();
+                csEncrypt.Write(data, 0, data.Length);
+                csEncrypt.FlushFinalBlock();
 
                 List<byte> list = new List<byte>();
-                list.AddRange(this.aes.IV);
+                list.AddRange(alg.IV);
                 list.AddRange(msEncrypt.ToArray());
 
                 return Convert.ToBase64String(list.ToArray());
@@ -58,20 +72,29 @@ namespace crypt_demo.Properties
         {
             byte[] data = Convert.FromBase64String(ciphertext);
 
-            Array.Copy(data, 0, this.aes.IV, 0, 16);
+            Array.Copy(data, 0, alg.IV, 0, BlockSize);
 
-            byte[] cryptedData = new byte[data.Length - 16];
-            Array.Copy(data, 16, cryptedData, 0, data.Length - 16);
+            //byte[] cryptedData = new byte[data.Length - 16];
+            //Array.Copy(data, 16, cryptedData, 0, cryptedData.Length);
 
-            using (var decrytpor = this.aes.CreateDecryptor())
-            using (var msEncrypt = new MemoryStream())
-            using (var csEncrypt = new CryptoStream(msEncrypt, decrytpor, CryptoStreamMode.Write))
-            using (var bw = new BinaryWriter(csEncrypt, Encoding.UTF8))
+            using (var decrytpor = alg.CreateDecryptor(alg.Key, alg.IV))
+            using (var msDecrypt = new MemoryStream())
+            using (var csDecrypt = new CryptoStream(msDecrypt, decrytpor, CryptoStreamMode.Write))
+
+            //using (var bw = new BinaryWriter(csDecrypt, Encoding.UTF8))
+            //{
+            //    bw.Write(cryptedData);
+            //    bw.Close();
+
             {
-                bw.Write(cryptedData);
-                bw.Close();
+                csDecrypt.Write(data, 0, data.Length);
+                csDecrypt.FlushFinalBlock();
 
-                return Encoding.UTF8.GetString(msEncrypt.ToArray());
+                var decryptedData = msDecrypt.ToArray();
+                var decrypted = new byte[decryptedData.Length - 16];
+                Array.Copy(decryptedData, 16, decrypted, 0, decrypted.Length);
+
+                return Encoding.UTF8.GetString(decrypted);
             }
         }
     }
