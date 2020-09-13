@@ -104,50 +104,47 @@ namespace crypt_demo_test
         // GoLang
 
         [TestMethod]
+        [Ignore]
         public void TestAesDecrypt_FromGo_128_Cfb()
         {
-            var decrypted = aes128Cfb.Decrypt("JLbKSQXWKFFs+727w1dBJXCAVQypFDYr+FwoJ+u3IMg=");
-
+            var decrypted = aes128Cfb.Decrypt(BaseTest.GO_AES_CFB_128);
             Assert.AreEqual(decrypted, data[0]);
         }
 
         [TestMethod]
+        [Ignore]
         public void TestAesDecrypt_FromGo_192_Cfb()
         {
-            var decrypted = aes192Cfb.Decrypt("lkyhuJGvKOwOT5cKYJz9mmO6ND2PGo/XOM5mv5OIvYM=");
-
+            var decrypted = aes192Cfb.Decrypt(BaseTest.GO_AES_CFB_192);
             Assert.AreEqual(decrypted, data[0]);
         }
 
         [TestMethod]
+        [Ignore]
         public void TestAesDecrypt_FromGo_256_Cfb()
         {
-            var decrypted = aes256Cfb.Decrypt("bmcX3+xKhz3Xml4/mQTL9qILe7SEIOfocERs4ZcqD74=");
-
+            var decrypted = aes256Cfb.Decrypt(BaseTest.GO_AES_CFB_256);
             Assert.AreEqual(decrypted, data[0]);
         }
 
         [TestMethod]
         public void TestAesDecrypt_FromGo_128_Cbc()
         {
-            var decrypted = aes128Cbc.Decrypt("U2FsdGVkX19XBYvodmAen0okxjD6wSPQoBWuEdsVkKU=");
-
+            var decrypted = aes128Cbc.Decrypt(BaseTest.GO_AES_CBC_128);
             Assert.AreEqual(decrypted, data[0]);
         }
 
         [TestMethod]
         public void TestAesDecrypt_FromGo_192_Cbc()
         {
-            var decrypted = aes192Cbc.Decrypt("hCNI0Yb90jKAhds4x9c4G0c5CwtRxMtCfe4As3JIq8A=");
-
+            var decrypted = aes192Cbc.Decrypt(BaseTest.GO_AES_CBC_192);
             Assert.AreEqual(decrypted, data[0]);
         }
 
         [TestMethod]
         public void TestAesDecrypt_FromGo_256_Cbc()
         {
-            var decrypted = aes256Cbc.Decrypt("dXP9pSWf6cgAegouT5UDTfkDE+t7A3j9khe7N/vNB00=");
-
+            var decrypted = aes256Cbc.Decrypt(BaseTest.GO_AES_CBC_256);
             Assert.AreEqual(decrypted, data[0]);
         }
 
@@ -156,99 +153,93 @@ namespace crypt_demo_test
         [TestMethod]
         public void TestAesDecrypt_FromJs_128_Cfb()
         {
-            var decrypted = aes128Cfb.Decrypt("y8R99YhPP/lxUgjqY+SpQAf1YwtONFeup7URr/2vmMk=");
-
+            var decrypted = aes128Cfb.Decrypt(BaseTest.JS_AES_CFB8_128);
             Assert.AreEqual(decrypted, data[0]);
         }
 
         [TestMethod]
         public void TestAesDecrypt_FromJs_192_Cfb()
         {
-            var decrypted = aes192Cfb.Decrypt("/LTF6sDSYCuZZz/89YsbKHFSLMfLGnJcUTmeOXwN+Jc=");
-
+            var decrypted = aes192Cfb.Decrypt(BaseTest.JS_AES_CFB8_192);
             Assert.AreEqual(decrypted, data[0]);
         }
 
         [TestMethod]
         public void TestAesDecrypt_FromJs_256_Cfb()
         {
-            var decrypted = aes256Cfb.Decrypt("pw+xIqA9PLYZcpbvYrungH/7sVXkNBZ3euvyEnDpnfk=");
-
+            var decrypted = aes256Cfb.Decrypt(BaseTest.JS_AES_CFB8_256);
             Assert.AreEqual(decrypted, data[0]);
         }
 
         [TestMethod]
         public void TestAesDecrypt_FromJs_128_Cbc()
         {
-            var decrypted = aes128Cbc.Decrypt("kqiHehYhsAo+ba+w5aJw+7nVftIu9TDIEG39uJHIEXPlfiVjRGc8dYBW2CCqshO2");
-
+            var decrypted = aes128Cbc.Decrypt(BaseTest.JS_AES_CBC_128);
             Assert.AreEqual(decrypted, data[0]);
         }
 
         [TestMethod]
         public void TestAesDecrypt_FromJs_192_Cbc()
         {
-            var decrypted = aes192Cbc.Decrypt("Aq4VxKVFXRTZ+8OvzKsw2WGa/DAMC3JZfoLdqza1rcbUdrccUc+7QCTn7cRgyMua");
-
+            var decrypted = aes192Cbc.Decrypt(BaseTest.JS_AES_CBC_192);
             Assert.AreEqual(decrypted, data[0]);
         }
 
         [TestMethod]
         public void TestAesDecrypt_FromJs_256_Cbc()
         {
-            var decrypted = aes256Cbc.Decrypt("jWnvB3QpTqPeSTXc5rFQVfTg4RBmKAPcNOE8SQ+BphFv5N0U5Fw5DGZiPTOJkic7");
+            var decrypted = aes256Cbc.Decrypt(BaseTest.JS_AES_CBC_256);
+            Assert.AreEqual(decrypted, data[0]);
+        }
+
+        // Py
+
+        [TestMethod]
+        public void TestAesDecrypt_FromPy_128_Cfb()
+        {
+            var decrypted = aes128Cfb.Decrypt(BaseTest.PY_AES_CFB8_128);
 
             Assert.AreEqual(decrypted, data[0]);
         }
 
-        //// Py
+        [TestMethod]
+        public void TestAesDecrypt_FromPy_192_Cfb()
+        {
+            var decrypted = aes192Cfb.Decrypt(BaseTest.PY_AES_CFB8_192);
 
-        //[TestMethod]
-        //public void TestAesDecrypt_FromPy_128_Cfb()
-        //{
-        //    var decrypted = aes128Cfb.Decrypt("5WPWeBKWEafSfZCAscojoXjpr6AG78cC7Sqx52X9/fo=");
+            Assert.AreEqual(decrypted, data[0]);
+        }
 
-        //    Assert.AreEqual(decrypted, data[0]);
-        //}
+        [TestMethod]
+        public void TestAesDecrypt_FromPy_256_Cfb()
+        {
+            var decrypted = aes256Cfb.Decrypt(BaseTest.PY_AES_CFB8_256);
 
-        //[TestMethod]
-        //public void TestAesDecrypt_FromPy_192_Cfb()
-        //{
-        //    var decrypted = aes192Cfb.Decrypt("lkyhuJGvKOwOT5cKYJz9mmO6ND2PGo/XOM5mv5OIvYM=");
+            Assert.AreEqual(decrypted, data[0]);
+        }
 
-        //    Assert.AreEqual(decrypted, data[0]);
-        //}
+        [TestMethod]
+        public void TestAesDecrypt_FromPy_128_Cbc()
+        {
+            var decrypted = aes128Cbc.Decrypt(BaseTest.PY_AES_CBC_128);
 
-        //[TestMethod]
-        //public void TestAesDecrypt_FromPy_256_Cfb()
-        //{
-        //    var decrypted = aes256Cfb.Decrypt("bmcX3+xKhz3Xml4/mQTL9qILe7SEIOfocERs4ZcqD74=");
+            Assert.AreEqual(decrypted, data[0]);
+        }
 
-        //    Assert.AreEqual(decrypted, data[0]);
-        //}
+        [TestMethod]
+        public void TestAesDecrypt_FromPy_192_Cbc()
+        {
+            var decrypted = aes192Cbc.Decrypt(BaseTest.PY_AES_CBC_192);
 
-        //[TestMethod]
-        //public void TestAesDecrypt_FromPy_128_Cbc()
-        //{
-        //    var decrypted = aes128Cbc.Decrypt("6u9RmbQs5XQQEIug+lP1+zRssBPfkQ5e0Y78TUbCtUE=");
+            Assert.AreEqual(decrypted, data[0]);
+        }
 
-        //    Assert.AreEqual(decrypted, data[0]);
-        //}
+        [TestMethod]
+        public void TestAesDecrypt_FromPy_256_Cbc()
+        {
+            var decrypted = aes256Cbc.Decrypt(BaseTest.PY_AES_CBC_256);
 
-        //[TestMethod]
-        //public void TestAesDecrypt_FromPy_192_Cbc()
-        //{
-        //    var decrypted = aes192Cbc.Decrypt("hCNI0Yb90jKAhds4x9c4G0c5CwtRxMtCfe4As3JIq8A=");
-
-        //    Assert.AreEqual(decrypted, data[0]);
-        //}
-
-        //[TestMethod]
-        //public void TestAesDecrypt_FromPy_256_Cbc()
-        //{
-        //    var decrypted = aes256Cbc.Decrypt("dXP9pSWf6cgAegouT5UDTfkDE+t7A3j9khe7N/vNB00=");
-
-        //    Assert.AreEqual(decrypted, data[0]);
-        //}
+            Assert.AreEqual(decrypted, data[0]);
+        }
     }
 }

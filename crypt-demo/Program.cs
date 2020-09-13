@@ -19,24 +19,24 @@ namespace crypt_demo
         static void Main(string[] args)
         {
 
-            Console.WriteLine("AES Encrypted Values:");
-            Console.WriteLine("CFB 128 => {0}", (new AesCrypt(aes128Hash)).Encrypt(data));
-            Console.WriteLine("CFB 192 => {0}", (new AesCrypt(aes192Hash)).Encrypt(data));
-            Console.WriteLine("CFB 256 => {0}", (new AesCrypt(aes256Hash)).Encrypt(data));
-            Console.WriteLine("CBC 128 => {0}", (new AesCrypt(aes128Hash, System.Security.Cryptography.CipherMode.CBC)).Encrypt(data));
-            Console.WriteLine("CBC 192 => {0}", (new AesCrypt(aes192Hash, System.Security.Cryptography.CipherMode.CBC)).Encrypt(data));
-            Console.WriteLine("CBC 256 => {0}", (new AesCrypt(aes256Hash, System.Security.Cryptography.CipherMode.CBC)).Encrypt(data));
+            Console.WriteLine("// AES Encrypted Values:");
+            Console.WriteLine("CS_AES_CFB8_128 = '{0}'", (new AesCrypt(aes128Hash)).Encrypt(data));
+            Console.WriteLine("CS_AES_CFB8_192 = '{0}'", (new AesCrypt(aes192Hash)).Encrypt(data));
+            Console.WriteLine("CS_AES_CFB8_256 = '{0}'", (new AesCrypt(aes256Hash)).Encrypt(data));
+            Console.WriteLine("CS_AES_CBC_128 = '{0}'", (new AesCrypt(aes128Hash, System.Security.Cryptography.CipherMode.CBC)).Encrypt(data));
+            Console.WriteLine("CS_AES_CBC_192 = '{0}'", (new AesCrypt(aes192Hash, System.Security.Cryptography.CipherMode.CBC)).Encrypt(data));
+            Console.WriteLine("CS_AES_CBC_256 = '{0}'", (new AesCrypt(aes256Hash, System.Security.Cryptography.CipherMode.CBC)).Encrypt(data));
 
-            var PubPath = String.Concat(Directory.GetCurrentDirectory(), "\\..\\..\\..\\cert\\rsa\\cert.pem").Replace("\\", Path.DirectorySeparatorChar.ToString());
-            var PrvPath = String.Concat(Directory.GetCurrentDirectory(), "\\..\\..\\..\\cert\\rsa\\key.pem").Replace("\\", Path.DirectorySeparatorChar.ToString());
+            //var PubPath = String.Concat(Directory.GetCurrentDirectory(), "\\..\\..\\..\\cert\\rsa\\cert.pem").Replace("\\", Path.DirectorySeparatorChar.ToString());
+            //var PrvPath = String.Concat(Directory.GetCurrentDirectory(), "\\..\\..\\..\\cert\\rsa\\key.pem").Replace("\\", Path.DirectorySeparatorChar.ToString());
 
-            Console.WriteLine("RSA Encrypted Values:");
-            Console.WriteLine((new RsaCrypt(PrvPath, PubPath)).Encrypt(data));
+            //Console.WriteLine("// RSA Encrypted Values:");
+            //Console.WriteLine("CS_RSA = '{}'", (new RsaCrypt(PrvPath, PubPath)).Encrypt(data));
 
-            var certPath = String.Concat(Directory.GetCurrentDirectory(), "\\..\\..\\..\\cert\\x509\\cert.pfx").Replace("\\", Path.DirectorySeparatorChar.ToString());
+            //var certPath = String.Concat(Directory.GetCurrentDirectory(), "\\..\\..\\..\\cert\\x509\\cert.pfx").Replace("\\", Path.DirectorySeparatorChar.ToString());
 
-            Console.WriteLine("X509 Encrypted Values:");
-            Console.WriteLine((new X509Crypt(certPath)).Encrypt(data));
+            //Console.WriteLine("// X509 Encrypted Values:");
+            //Console.WriteLine("CS_X509 = '{}'", (new X509Crypt(certPath)).Encrypt(data));
 
             Console.ReadKey();
             Console.ReadKey();
