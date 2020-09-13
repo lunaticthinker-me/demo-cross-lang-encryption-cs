@@ -11,34 +11,61 @@ namespace crypt_demo.Properties
 {
     public class RsaCrypt
     {
+        public static int PADDING_PKCS1V15 = 0;
+        public static int PADDING_OAEP = 1;
+
+        private int padding;
         private RsaKeyParameters PublicKey;
         private AsymmetricKeyParameter PrivateKey;
+        private IAsymmetricBlockCipher cipher;
 
-        public RsaCrypt(String PrvPath, String PubPath)
+        public RsaCrypt(String PrvPath, String PubPath, int padding)
         {
+            this.padding = padding;
             PrivateKey = ReadPrivateKey(PrvPath);
             PublicKey = ReadPublicKey(PubPath);
         }
 
-        public string Encrypt(String Password)
+        public string Encrypt(String plaintext)
         {
-            var cipher = new Pkcs1Encoding(new RsaEngine());
-            cipher.Init(true, PublicKey);
-            var toEncrypt = Encoding.UTF8.GetBytes(Password);
-            var EncryptedPassword = cipher.ProcessBlock(toEncrypt, 0, toEncrypt.Length);
+            var toEncrypt = Encoding.UTF8.GetBytes(plaintext);
+            var ciphertext = new byte[1];
 
-            return Convert.ToBase64String(EncryptedPassword);
+            if (padding == PADDING_PKCS1V15) {
+                cipher = new Pkcs1Encoding(new RsaEngine());
+                cipher.Init(true, PublicKey);
+                ciphertext = cipher.ProcessBlock(toEncrypt, 0, toEncrypt.Length);
+            } else
+            {
+                cipher = new OaepEncoding(new RsaEngine());
+                cipher.Init(true, PublicKey);
+                ciphertext = cipher.ProcessBlock(toEncrypt, 0, toEncrypt.Length);
+            }
+
+            return Convert.ToBase64String(ciphertext);
         }
 
-        public string Decrypt(String Password)
+        public string Decrypt(String ciphertext)
         {
-            var bytesToDecrypt = Convert.FromBase64String(Password);
-            var decryptEngine = new Pkcs1Encoding(new RsaEngine());
-            decryptEngine.Init(false, PrivateKey);
-            var EncryptedPassword = Encoding.UTF8.GetString(decryptEngine.ProcessBlock(bytesToDecrypt, 0, bytesToDecrypt.Length));
+            var bytesToDecrypt = Convert.FromBase64String(ciphertext);
+            var plaintext = "";
 
-            return EncryptedPassword;
+            if (padding == PADDING_PKCS1V15)
+            {
+                var decryptEngine = new Pkcs1Encoding(new RsaEngine());
+                decryptEngine.Init(false, PrivateKey);
+                plaintext = Encoding.UTF8.GetString(decryptEngine.ProcessBlock(bytesToDecrypt, 0, bytesToDecrypt.Length));
+            }
+            else
+            {
+                var decryptEngine = new OaepEncoding(new RsaEngine());
+                decryptEngine.Init(false, PrivateKey);
+                plaintext = Encoding.UTF8.GetString(decryptEngine.ProcessBlock(bytesToDecrypt, 0, bytesToDecrypt.Length));
+            }
+
+            return plaintext;
         }
+
 
         private AsymmetricKeyParameter ReadPrivateKey(String Path)
         {

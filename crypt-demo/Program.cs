@@ -27,16 +27,17 @@ namespace crypt_demo
             Console.WriteLine("CS_AES_CBC_192 = '{0}'", (new AesCrypt(aes192Hash, System.Security.Cryptography.CipherMode.CBC)).Encrypt(data));
             Console.WriteLine("CS_AES_CBC_256 = '{0}'", (new AesCrypt(aes256Hash, System.Security.Cryptography.CipherMode.CBC)).Encrypt(data));
 
-            //var PubPath = String.Concat(Directory.GetCurrentDirectory(), "\\..\\..\\..\\cert\\rsa\\cert.pem").Replace("\\", Path.DirectorySeparatorChar.ToString());
-            //var PrvPath = String.Concat(Directory.GetCurrentDirectory(), "\\..\\..\\..\\cert\\rsa\\key.pem").Replace("\\", Path.DirectorySeparatorChar.ToString());
+            var PubPath = String.Concat(Directory.GetCurrentDirectory(), "\\..\\..\\..\\cert\\rsa\\cert.pem").Replace("\\", Path.DirectorySeparatorChar.ToString());
+            var PrvPath = String.Concat(Directory.GetCurrentDirectory(), "\\..\\..\\..\\cert\\rsa\\key.pem").Replace("\\", Path.DirectorySeparatorChar.ToString());
 
-            //Console.WriteLine("// RSA Encrypted Values:");
-            //Console.WriteLine("CS_RSA = '{}'", (new RsaCrypt(PrvPath, PubPath)).Encrypt(data));
+            Console.WriteLine("// RSA Encrypted Values:");
+            Console.WriteLine("CS_RSA_PKCS1V1_5 = '{0}'", (new RsaCrypt(PrvPath, PubPath, RsaCrypt.PADDING_PKCS1V15)).Encrypt(data));
+            Console.WriteLine("CS_RSA_OAEP = '{0}'", (new RsaCrypt(PrvPath, PubPath, RsaCrypt.PADDING_OAEP)).Encrypt(data));
 
-            //var certPath = String.Concat(Directory.GetCurrentDirectory(), "\\..\\..\\..\\cert\\x509\\cert.pfx").Replace("\\", Path.DirectorySeparatorChar.ToString());
+            var certPath = String.Concat(Directory.GetCurrentDirectory(), "\\..\\..\\..\\cert\\x509\\cert.pfx").Replace("\\", Path.DirectorySeparatorChar.ToString());
 
-            //Console.WriteLine("// X509 Encrypted Values:");
-            //Console.WriteLine("CS_X509 = '{}'", (new X509Crypt(certPath)).Encrypt(data));
+            Console.WriteLine("// X509 Encrypted Values:");
+            Console.WriteLine("CS_X509 = '{0}'", (new X509Crypt(certPath)).Encrypt(data));
 
             Console.ReadKey();
             Console.ReadKey();
