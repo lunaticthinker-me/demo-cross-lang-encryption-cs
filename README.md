@@ -44,6 +44,7 @@ Encrypt/Decrypt Example for the Article [Cross Programming Language Encryption �
 ## Compatibility
 
 | Algorithm / Language (Go) | C# | Go | Js | Py |
+|---|---|---|---|---|
 | AES/CFB | ? | ? | ? | ? |
 | AES/CFB8 | ✓ | ✕ | ✓ | ✓ |
 | AES/CBC | ✓ | ✓ | ✓ | ✓ |
