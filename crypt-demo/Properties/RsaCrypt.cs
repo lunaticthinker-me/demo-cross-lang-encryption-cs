@@ -14,10 +14,17 @@ namespace crypt_demo.Properties
         public static int PADDING_PKCS1V15 = 0;
         public static int PADDING_OAEP = 1;
 
-        private int padding;
-        private RsaKeyParameters PublicKey;
-        private AsymmetricKeyParameter PrivateKey;
-        private IAsymmetricBlockCipher cipher;
+        protected int padding;
+        protected RsaKeyParameters PublicKey;
+        protected AsymmetricKeyParameter PrivateKey;
+        protected IAsymmetricBlockCipher cipher;
+
+        public RsaCrypt(AsymmetricKeyParameter Private, RsaKeyParameters Public, int padding)
+        {
+            this.padding = padding;
+            PrivateKey = Private;
+            PublicKey = Public;
+        }
 
         public RsaCrypt(String PrvPath, String PubPath, int padding)
         {
@@ -66,8 +73,7 @@ namespace crypt_demo.Properties
             return plaintext;
         }
 
-
-        private AsymmetricKeyParameter ReadPrivateKey(String Path)
+        protected static AsymmetricKeyParameter ReadPrivateKey(String Path)
         {
             AsymmetricCipherKeyPair keyPair;
 
@@ -75,14 +81,9 @@ namespace crypt_demo.Properties
                 keyPair = (AsymmetricCipherKeyPair)new PemReader(reader).ReadObject();
 
             return keyPair.Private;
-            //var FileStream = System.IO.File.OpenText(Path);
-            //var PemReader = new PemReader(FileStream);
-            //var KeyParameter = (AsymmetricKeyParameter)PemReader.ReadObject();
-
-            //return KeyParameter;
         }
 
-        private RsaKeyParameters ReadPublicKey(String Path)
+        protected static RsaKeyParameters ReadPublicKey(String Path)
         {
             var FileStream = System.IO.File.OpenText(Path);
             var PemReader = new PemReader(FileStream);

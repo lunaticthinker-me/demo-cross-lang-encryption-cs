@@ -30,7 +30,18 @@ namespace crypt_demo_test
         }
 
         [TestMethod]
-        public void TestRsaEncryptDecrypt()
+        public void TestRsaEncryptDecrypt_Oaep()
+        {
+            foreach (var item in data)
+            {
+                var encrypted = rsaOaep.Encrypt(item);
+                var decrypted = rsaOaep.Decrypt(encrypted);
+                Assert.AreEqual(decrypted, item);
+            }
+        }
+
+        [TestMethod]
+        public void TestRsaEncryptDecrypt_Pkcs1v15()
         {
             foreach (var item in data)
             {
@@ -38,13 +49,6 @@ namespace crypt_demo_test
                 var decrypted = rsaPkcs1v15.Decrypt(encrypted);
                 Assert.AreEqual(decrypted, item);
             }
-        }
-
-        [TestMethod]
-        public void TestRsaDecrypt_From_Go_Pkcs1v15()
-        {
-            var decrypted = rsaPkcs1v15.Decrypt(BaseTest.GO_RSA_PKCS1V1_5);
-            Assert.AreEqual(decrypted, data[0]);
         }
 
         [TestMethod]
@@ -56,9 +60,9 @@ namespace crypt_demo_test
         }
 
         [TestMethod]
-        public void TestRsaDecrypt_From_Js_Pkcs1v15()
+        public void TestRsaDecrypt_From_Go_Pkcs1v15()
         {
-            var decrypted = rsaPkcs1v15.Decrypt(BaseTest.JS_RSA_PKCS1V1_5);
+            var decrypted = rsaPkcs1v15.Decrypt(BaseTest.GO_RSA_PKCS1V1_5);
             Assert.AreEqual(decrypted, data[0]);
         }
 
@@ -70,9 +74,9 @@ namespace crypt_demo_test
         }
 
         [TestMethod]
-        public void TestRsaDecrypt_From_Py_Pkcs1v15()
+        public void TestRsaDecrypt_From_Js_Pkcs1v15()
         {
-            var decrypted = rsaPkcs1v15.Decrypt(BaseTest.PY_RSA_PKCS1V1_5);
+            var decrypted = rsaPkcs1v15.Decrypt(BaseTest.JS_RSA_PKCS1V1_5);
             Assert.AreEqual(decrypted, data[0]);
         }
 
@@ -80,6 +84,13 @@ namespace crypt_demo_test
         public void TestRsaDecrypt_From_Py_Oaep()
         {
             var decrypted = rsaOaep.Decrypt(BaseTest.PY_RSA_OAEP);
+            Assert.AreEqual(decrypted, data[0]);
+        }
+
+        [TestMethod]
+        public void TestRsaDecrypt_From_Py_Pkcs1v15()
+        {
+            var decrypted = rsaPkcs1v15.Decrypt(BaseTest.PY_RSA_PKCS1V1_5);
             Assert.AreEqual(decrypted, data[0]);
         }
     }

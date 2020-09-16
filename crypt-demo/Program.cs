@@ -35,9 +35,12 @@ namespace crypt_demo
             Console.WriteLine("CS_RSA_OAEP = '{0}'", (new RsaCrypt(PrvPath, PubPath, RsaCrypt.PADDING_OAEP)).Encrypt(data));
 
             var certPath = String.Concat(Directory.GetCurrentDirectory(), "\\..\\..\\..\\cert\\x509\\cert.pfx").Replace("\\", Path.DirectorySeparatorChar.ToString());
+            PubPath = String.Concat(Directory.GetCurrentDirectory(), "\\..\\..\\..\\cert\\x509\\cert.pem").Replace("\\", Path.DirectorySeparatorChar.ToString());
+            PrvPath = String.Concat(Directory.GetCurrentDirectory(), "\\..\\..\\..\\cert\\x509\\key.pem").Replace("\\", Path.DirectorySeparatorChar.ToString());
 
             Console.WriteLine("// X509 Encrypted Values:");
-            Console.WriteLine("CS_X509 = '{0}'", (new X509Crypt(certPath)).Encrypt(data));
+            Console.WriteLine("CS_X509_OAEP = '{0}'", (new X509Crypt(PrvPath, PubPath, X509Crypt.PADDING_OAEP)).Encrypt(data));
+            Console.WriteLine("CS_X509_PKCS1V1_5 = '{0}'", (new X509Crypt(PrvPath, PubPath, X509Crypt.PADDING_PKCS1V15)).Encrypt(data));
 
             Console.ReadKey();
             Console.ReadKey();
