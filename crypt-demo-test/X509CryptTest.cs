@@ -8,13 +8,11 @@ namespace crypt_demo_test
     [TestClass]
     public class X509CryptTest
     {
-        protected string[] data = BaseTest.GenerateData();
 
         public X509Crypt x509Oaep
         {
             get
             {
-                //String certPath = String.Concat(Directory.GetCurrentDirectory(), "\\..\\..\\..\\cert\\x509\\cert.pfx").Replace("\\", Path.DirectorySeparatorChar.ToString());
                 String PubPath = String.Concat(Directory.GetCurrentDirectory(), "\\..\\..\\..\\cert\\x509\\cert.pem").Replace("\\", Path.DirectorySeparatorChar.ToString());
                 String PrvPath = String.Concat(Directory.GetCurrentDirectory(), "\\..\\..\\..\\cert\\x509\\key.pem").Replace("\\", Path.DirectorySeparatorChar.ToString());
                 return new X509Crypt(PrvPath, PubPath, X509Crypt.PADDING_OAEP);
@@ -25,7 +23,6 @@ namespace crypt_demo_test
         {
             get
             {
-                //String certPath = String.Concat(Directory.GetCurrentDirectory(), "\\..\\..\\..\\cert\\x509\\cert.pfx").Replace("\\", Path.DirectorySeparatorChar.ToString());
                 String PubPath = String.Concat(Directory.GetCurrentDirectory(), "\\..\\..\\..\\cert\\x509\\cert.pem").Replace("\\", Path.DirectorySeparatorChar.ToString());
                 String PrvPath = String.Concat(Directory.GetCurrentDirectory(), "\\..\\..\\..\\cert\\x509\\key.pem").Replace("\\", Path.DirectorySeparatorChar.ToString());
                 return new X509Crypt(PrvPath, PubPath, X509Crypt.PADDING_PKCS1V15);
@@ -35,7 +32,7 @@ namespace crypt_demo_test
         [TestMethod]
         public void TestRsaEncryptDecrypt_Oaep()
         {
-            foreach (var item in data)
+            foreach (var item in BaseTest.data)
             {
                 var encrypted = x509Oaep.Encrypt(item);
                 var decrypted = x509Oaep.Decrypt(encrypted);
@@ -46,7 +43,7 @@ namespace crypt_demo_test
         [TestMethod]
         public void TestRsaEncryptDecrypt_Pkcs1v15()
         {
-            foreach (var item in data)
+            foreach (var item in BaseTest.data)
             {
                 var encrypted = x509Pkcs1v15.Encrypt(item);
                 var decrypted = x509Pkcs1v15.Decrypt(encrypted);
@@ -59,14 +56,14 @@ namespace crypt_demo_test
         public void TestX509Decrypt_From_Go_Oaep()
         {
             var decrypted = x509Oaep.Decrypt(BaseTest.GO_X509_OAEP);
-            Assert.AreEqual(decrypted, data[0]);
+            Assert.AreEqual(decrypted, BaseTest.data[0]);
         }
 
         [TestMethod]
         public void TestX509Decrypt_From_Go_Pkcs1v15()
         {
             var decrypted = x509Pkcs1v15.Decrypt(BaseTest.GO_X509_PKCS1V1_5);
-            Assert.AreEqual(decrypted, data[0]);
+            Assert.AreEqual(decrypted, BaseTest.data[0]);
         }
 
         [TestMethod]
@@ -74,28 +71,28 @@ namespace crypt_demo_test
         public void TestX509Decrypt_From_Js_Oaep()
         {
             var decrypted = x509Oaep.Decrypt(BaseTest.JS_X509_OAEP);
-            Assert.AreEqual(decrypted, data[0]);
+            Assert.AreEqual(decrypted, BaseTest.data[0]);
         }
 
         [TestMethod]
         public void TestX509Decrypt_From_Js_Pkcs1v15()
         {
             var decrypted = x509Pkcs1v15.Decrypt(BaseTest.JS_X509_PKCS1V1_5);
-            Assert.AreEqual(decrypted, data[0]);
+            Assert.AreEqual(decrypted, BaseTest.data[0]);
         }
 
         [TestMethod]
         public void TestX509Decrypt_From_Py_Oaep()
         {
             var decrypted = x509Oaep.Decrypt(BaseTest.PY_X509_OAEP);
-            Assert.AreEqual(decrypted, data[0]);
+            Assert.AreEqual(decrypted, BaseTest.data[0]);
         }
 
         [TestMethod]
         public void TestX509Decrypt_From_Py_Pkcs1v15()
         {
             var decrypted = x509Pkcs1v15.Decrypt(BaseTest.PY_X509_PKCS1V1_5);
-            Assert.AreEqual(decrypted, data[0]);
+            Assert.AreEqual(decrypted, BaseTest.data[0]);
         }
     }
 }

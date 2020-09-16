@@ -12,7 +12,6 @@ namespace crypt_demo_test
     [TestClass]
     public class AesCryptTest
     {
-        static string[] data = BaseTest.GenerateData();
 
         AesCrypt aes128Cfb = new AesCrypt(BaseTest.aes128Hash);
         AesCrypt aes192Cfb = new AesCrypt(BaseTest.aes192Hash);
@@ -30,7 +29,7 @@ namespace crypt_demo_test
         [TestMethod]
         public void TestAesEncryptDecrypt_128_Cfb()
         {
-            foreach (string item in data)
+            foreach (string item in BaseTest.data)
             {
                 var encrypted = aes128Cfb.Encrypt(item);
                 var decrypted = aes128Cfb.Decrypt(encrypted);
@@ -42,7 +41,7 @@ namespace crypt_demo_test
         [TestMethod]
         public void TestAesEncryptDecrypt_192_Cfb()
         {
-            foreach (string item in data)
+            foreach (string item in BaseTest.data)
             {
                 var encrypted = aes192Cfb.Encrypt(item);
                 var decrypted = aes192Cfb.Decrypt(encrypted);
@@ -54,7 +53,7 @@ namespace crypt_demo_test
         [TestMethod]
         public void TestAesEncryptDecrypt_256_Cfb()
         {
-            foreach (string item in data)
+            foreach (string item in BaseTest.data)
             {
                 var encrypted = aes256Cfb.Encrypt(item);
                 var decrypted = aes256Cfb.Decrypt(encrypted);
@@ -67,7 +66,7 @@ namespace crypt_demo_test
         public void TestAesEncryptDecrypt_128_Cbc()
         {
 
-            foreach (string item in data)
+            foreach (string item in BaseTest.data)
             {
                 var encrypted = aes128Cbc.Encrypt(item);
                 var decrypted = aes128Cbc.Decrypt(encrypted);
@@ -79,7 +78,7 @@ namespace crypt_demo_test
         [TestMethod]
         public void TestAesEncryptDecrypt_192_Cbc()
         {
-            foreach (string item in data)
+            foreach (string item in BaseTest.data)
             {
                 var encrypted = aes192Cbc.Encrypt(item);
                 var decrypted = aes192Cbc.Decrypt(encrypted);
@@ -92,7 +91,7 @@ namespace crypt_demo_test
         public void TestAesEncryptDecrypt_256_Cbc()
         {
 
-            foreach (string item in data)
+            foreach (string item in BaseTest.data)
             {
                 var encrypted = aes256Cbc.Encrypt(item);
                 var decrypted = aes256Cbc.Decrypt(encrypted);
@@ -108,7 +107,7 @@ namespace crypt_demo_test
         public void TestAesDecrypt_FromGo_128_Cfb()
         {
             var decrypted = aes128Cfb.Decrypt(BaseTest.GO_AES_CFB_128);
-            Assert.AreEqual(decrypted, data[0]);
+            Assert.AreEqual(decrypted, BaseTest.data[0]);
         }
 
         [TestMethod]
@@ -116,7 +115,7 @@ namespace crypt_demo_test
         public void TestAesDecrypt_FromGo_192_Cfb()
         {
             var decrypted = aes192Cfb.Decrypt(BaseTest.GO_AES_CFB_192);
-            Assert.AreEqual(decrypted, data[0]);
+            Assert.AreEqual(decrypted, BaseTest.data[0]);
         }
 
         [TestMethod]
@@ -124,28 +123,28 @@ namespace crypt_demo_test
         public void TestAesDecrypt_FromGo_256_Cfb()
         {
             var decrypted = aes256Cfb.Decrypt(BaseTest.GO_AES_CFB_256);
-            Assert.AreEqual(decrypted, data[0]);
+            Assert.AreEqual(decrypted, BaseTest.data[0]);
         }
 
         [TestMethod]
         public void TestAesDecrypt_FromGo_128_Cbc()
         {
             var decrypted = aes128Cbc.Decrypt(BaseTest.GO_AES_CBC_128);
-            Assert.AreEqual(decrypted, data[0]);
+            Assert.AreEqual(decrypted, BaseTest.data[0]);
         }
 
         [TestMethod]
         public void TestAesDecrypt_FromGo_192_Cbc()
         {
             var decrypted = aes192Cbc.Decrypt(BaseTest.GO_AES_CBC_192);
-            Assert.AreEqual(decrypted, data[0]);
+            Assert.AreEqual(decrypted, BaseTest.data[0]);
         }
 
         [TestMethod]
         public void TestAesDecrypt_FromGo_256_Cbc()
         {
             var decrypted = aes256Cbc.Decrypt(BaseTest.GO_AES_CBC_256);
-            Assert.AreEqual(decrypted, data[0]);
+            Assert.AreEqual(decrypted, BaseTest.data[0]);
         }
 
         // Js
@@ -154,42 +153,42 @@ namespace crypt_demo_test
         public void TestAesDecrypt_FromJs_128_Cfb()
         {
             var decrypted = aes128Cfb.Decrypt(BaseTest.JS_AES_CFB8_128);
-            Assert.AreEqual(decrypted, data[0]);
+            Assert.AreEqual(decrypted, BaseTest.data[0]);
         }
 
         [TestMethod]
         public void TestAesDecrypt_FromJs_192_Cfb()
         {
             var decrypted = aes192Cfb.Decrypt(BaseTest.JS_AES_CFB8_192);
-            Assert.AreEqual(decrypted, data[0]);
+            Assert.AreEqual(decrypted, BaseTest.data[0]);
         }
 
         [TestMethod]
         public void TestAesDecrypt_FromJs_256_Cfb()
         {
             var decrypted = aes256Cfb.Decrypt(BaseTest.JS_AES_CFB8_256);
-            Assert.AreEqual(decrypted, data[0]);
+            Assert.AreEqual(decrypted, BaseTest.data[0]);
         }
 
         [TestMethod]
         public void TestAesDecrypt_FromJs_128_Cbc()
         {
             var decrypted = aes128Cbc.Decrypt(BaseTest.JS_AES_CBC_128);
-            Assert.AreEqual(decrypted, data[0]);
+            Assert.AreEqual(decrypted, BaseTest.data[0]);
         }
 
         [TestMethod]
         public void TestAesDecrypt_FromJs_192_Cbc()
         {
             var decrypted = aes192Cbc.Decrypt(BaseTest.JS_AES_CBC_192);
-            Assert.AreEqual(decrypted, data[0]);
+            Assert.AreEqual(decrypted, BaseTest.data[0]);
         }
 
         [TestMethod]
         public void TestAesDecrypt_FromJs_256_Cbc()
         {
             var decrypted = aes256Cbc.Decrypt(BaseTest.JS_AES_CBC_256);
-            Assert.AreEqual(decrypted, data[0]);
+            Assert.AreEqual(decrypted, BaseTest.data[0]);
         }
 
         // Py
@@ -199,7 +198,7 @@ namespace crypt_demo_test
         {
             var decrypted = aes128Cfb.Decrypt(BaseTest.PY_AES_CFB8_128);
 
-            Assert.AreEqual(decrypted, data[0]);
+            Assert.AreEqual(decrypted, BaseTest.data[0]);
         }
 
         [TestMethod]
@@ -207,7 +206,7 @@ namespace crypt_demo_test
         {
             var decrypted = aes192Cfb.Decrypt(BaseTest.PY_AES_CFB8_192);
 
-            Assert.AreEqual(decrypted, data[0]);
+            Assert.AreEqual(decrypted, BaseTest.data[0]);
         }
 
         [TestMethod]
@@ -215,7 +214,7 @@ namespace crypt_demo_test
         {
             var decrypted = aes256Cfb.Decrypt(BaseTest.PY_AES_CFB8_256);
 
-            Assert.AreEqual(decrypted, data[0]);
+            Assert.AreEqual(decrypted, BaseTest.data[0]);
         }
 
         [TestMethod]
@@ -223,7 +222,7 @@ namespace crypt_demo_test
         {
             var decrypted = aes128Cbc.Decrypt(BaseTest.PY_AES_CBC_128);
 
-            Assert.AreEqual(decrypted, data[0]);
+            Assert.AreEqual(decrypted, BaseTest.data[0]);
         }
 
         [TestMethod]
@@ -231,7 +230,7 @@ namespace crypt_demo_test
         {
             var decrypted = aes192Cbc.Decrypt(BaseTest.PY_AES_CBC_192);
 
-            Assert.AreEqual(decrypted, data[0]);
+            Assert.AreEqual(decrypted, BaseTest.data[0]);
         }
 
         [TestMethod]
@@ -239,7 +238,7 @@ namespace crypt_demo_test
         {
             var decrypted = aes256Cbc.Decrypt(BaseTest.PY_AES_CBC_256);
 
-            Assert.AreEqual(decrypted, data[0]);
+            Assert.AreEqual(decrypted, BaseTest.data[0]);
         }
     }
 }

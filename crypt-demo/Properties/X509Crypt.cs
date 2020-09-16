@@ -54,12 +54,12 @@ namespace crypt_demo.Properties
 
         protected static AsymmetricKeyParameter ReadPrivateKey(String Path)
         {
-            RsaPrivateCrtKeyParameters keyPair;
+            AsymmetricCipherKeyPair keyPair;
 
             using (var reader = File.OpenText(Path))
-                keyPair = (RsaPrivateCrtKeyParameters)new PemReader(reader).ReadObject();
+                keyPair = (AsymmetricCipherKeyPair)new PemReader(reader).ReadObject();
 
-            return keyPair;
+            return keyPair.Private;
         }
 
         protected static Org.BouncyCastle.X509.X509Certificate ReadCertificate(String Path)
